@@ -24,6 +24,23 @@ module Api
 
 			end
 
+			def destroy
+				game = Game.find(params[:id])
+
+				game.destroy
+				render json: {status: 'SUCCESS', message: 'Deleted game', data:game},status: :ok
+			end
+
+			def update
+				game = Game.find(params[:id])
+
+				if game.update_attributes(game_params)
+					render json: {status: 'SUCCESS', message: 'Updates game', data:game},status: :ok
+				else
+					render json: {status: 'ERROR', message: 'Game not updated', data:game.errors},status: :unprocessable_entity
+				end
+			end
+
 			private
 
 			def game_params
