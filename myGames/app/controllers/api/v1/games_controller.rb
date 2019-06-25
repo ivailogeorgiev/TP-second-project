@@ -4,7 +4,8 @@ module Api
 			def index
 				games = Game.order('created_at DESC');
 
-				render json: {status: 'SUCCESS', message: 'Loaded games', data:games},status: :ok
+				# render json: {status: 'SUCCESS', message: 'Loaded games', data:games},status: :ok
+				paginate json: games, per_page: 5
 			end
 
 			def show
@@ -48,4 +49,4 @@ module Api
 			end
 		end
 	end
-end
+end 	
